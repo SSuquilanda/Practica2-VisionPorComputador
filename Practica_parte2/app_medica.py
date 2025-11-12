@@ -23,7 +23,7 @@ def allowed_file(filename):
 def upload_file():
     # proceso cuando el usuario envía una imagen 
     if request.method == 'POST':
-        # Revisa si la petición tiene un archivo
+        # aqui revisamos si la petición tiene un archivo
         if 'file' not in request.files:
             return redirect(request.url)
         
