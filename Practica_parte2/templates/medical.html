@@ -28,14 +28,14 @@
     <h1>Parte 2: Operaciones Morfológicas en Imágenes Médicas</h1>
     <hr>
     
-    <!-- Formulario para subir la imagen -->
+    /* Formulario para subir la imagen */
     <form method="POST" enctype="multipart/form-data">
         <h2>Sube una imagen médica (radiografía, TAC, etc.):</h2>
         <input type="file" name="file" accept="image/*">
         <input type="submit" value="Procesar Imagen">
     </form>
 
-    <!-- Esta sección solo aparece si se han procesado las imágenes -->
+    /* Si hay una imagen procesada, mostramos los resultados */
     {% if original %}
         <hr>
         <h2>Resultados del Procesamiento:</h2>
@@ -44,7 +44,8 @@
             
             <div class="img-container">
                 <p>1. Imagen Original</p>
-                <!-- Usamos 'url_for' para encontrar la imagen en la carpeta 'static' -->
+                /* Mostramos la imagen original, de la carpeta 'static/uploads' */
+                
                 <img src="{{ url_for('static', filename='uploads/' + original) }}" alt="Imagen Original">
             </div>
 
