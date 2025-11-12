@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Práctica 1 - Parte 2 (Imágenes Médicas)</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f4f4f4; }
+        h1, h2 { text-align: center; color: #333; }
+        form { text-align: center; margin-bottom: 30px; }
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            text-align: center;
+        }
+        .img-container {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 10px;
+        }
+        img { max-width: 100%; height: auto; border-radius: 4px; }
+        p { font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>Parte 2: Operaciones Morfológicas en Imágenes Médicas</h1>
+    <hr>
+    
+    <!-- Formulario para subir la imagen -->
+    <form method="POST" enctype="multipart/form-data">
+        <h2>Sube una imagen médica (radiografía, TAC, etc.):</h2>
+        <input type="file" name="file" accept="image/*">
+        <input type="submit" value="Procesar Imagen">
+    </form>
+
+    <!-- Esta sección solo aparece si se han procesado las imágenes -->
+    {% if original %}
+        <hr>
+        <h2>Resultados del Procesamiento:</h2>
+        
+        <div class="results-grid">
+            
+            <div class="img-container">
+                <p>1. Imagen Original</p>
+                <!-- Usamos 'url_for' para encontrar la imagen en la carpeta 'static' -->
+                <img src="{{ url_for('static', filename='uploads/' + original) }}" alt="Imagen Original">
+            </div>
+
+            <div class="img-container">
+                <p>2. Top Hat (Objetos brillantes)</p>
+                <img src="{{ url_for('static', filename='uploads/' + tophat) }}" alt="Top Hat">
+            </div>
+
+            <div class="img-container">
+                <p>3. Black Hat (Objetos oscuros)</p>
+                <img src="{{ url_for('static', filename='uploads/' + blackhat) }}" alt="Black Hat">
+            </div>
+
+            <div class="img-container">
+                <p>4. Resultado Final (Contraste Mejorado)</p>
+                <img src="{{ url_for('static', filename='uploads/' + result) }}" alt="Resultado Final">
+            </div>
+            
+        </div>
+        
+        <div style="text-align: center; margin-top: 20px;">
+            <h3>Reflexión:</h3>
+            <p>Compara la imagen (1) con la (4). La imagen (4) es el resultado de: <br>
+               <code>Original + (Top Hat - Black Hat)</code>
+            </p>
+            <p>Esto realza los detalles finos y mejora el contraste local,
+               haciendo que estructuras como venas o tumores sean más fáciles de ver.</p>
+        </div>
+    {% endif %}
+
+</body>
+</html>

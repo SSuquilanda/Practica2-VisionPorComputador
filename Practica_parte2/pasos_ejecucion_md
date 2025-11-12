@@ -1,0 +1,24 @@
+Cómo probar la Parte 2
+Guarda los archivos como te indiqué (en la nueva carpeta Practica_Parte2).
+
+Busca imágenes médicas en Google (ej. "chest x-ray" o "angiography image") y descarga 2 o 3.
+
+Ejecuta la app:
+
+Abre un nuevo terminal.
+
+Ve a la carpeta Practica_Parte2.
+
+Activa el entorno virtual: ..\ruta\a\tu\venv\Scripts\activate (puedes reusar el mismo venv de la Parte 1).
+
+Ejecuta el script: python app_medica.py
+
+Prueba en el navegador:
+
+Abre Chrome y ve a http://127.0.0.1:5001 (nota el puerto 5001).
+
+Deberías ver el formulario para subir archivos.
+
+Sube una de las imágenes médicas que descargaste.
+
+¡Verás los 4 resultados de la práctica al instante
