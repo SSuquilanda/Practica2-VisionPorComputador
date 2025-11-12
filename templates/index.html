@@ -20,13 +20,14 @@
                align-items: center;
           }
      </style>
-     <title>Videostreaming ESP32-CAM</title>
+     <title>Práctica 2 - Visión por Computador / Video Streaming</title>
 </head>
 <body class = "container">
      <div class="containerHeader">
-          <h1>Video Streaming</h1>
-          <img src="{{ url_for('static', filename='Header.webp') }}" alt="Image header" width="50%">
+          <h1>Resultado Práctica 2 (Cuadrícula 2x2)</h1>
      </div>
+     /*pedimos a Flask la "imagen" que está en la ruta 
+     video_stream, y nuestra app.py le responde enviándole un video sin fin*/
      <img src="{{ url_for('video_stream') }}">
 </body>
 </html>
