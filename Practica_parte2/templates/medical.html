@@ -3,49 +3,111 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Práctica 1 - Parte 2 (Imágenes Médicas)</title>
+    <title>Práctica 2 - Parte 2 (Imágenes Médicas)</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f4f4f4; }
-        h1, h2 { text-align: center; color: #333; }
-        form { text-align: center; margin-bottom: 30px; }
-        .results-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
+        /* --- Nuevo Diseño --- */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f2f5; /* Un gris azulado más profesional */
+            color: #333;
+        }
+        .header, .reflexion {
+            text-align: center;
+            max-width: 900px;
+            margin: 20px auto;
+        }
+        h1, h2 {
+            color: #1a2b4d; /* Azul oscuro */
+        }
+        form {
+            background-color: #ffffff;
+            border-radius: 12px;
+            padding: 25px;
+            max-width: 900px;
+            margin: 20px auto;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
             text-align: center;
         }
-        .img-container {
-            background-color: #fff;
+        input[type="file"] {
             border: 1px solid #ddd;
-            border-radius: 8px;
-            padding: 10px;
+            padding: 8px;
+            border-radius: 6px;
         }
-        img { max-width: 100%; height: auto; border-radius: 4px; }
-        p { font-weight: bold; }
+        input[type="submit"] {
+            background-color: #007bff; /* Azul primario */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.2s;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        .results-grid {
+            display: grid;
+            /* Se adapta automáticamente: 2 columnas en PC, 1 en móvil */
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+            max-width: 900px;
+            margin: 30px auto;
+        }
+        .img-container {
+            background-color: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            text-align: center;
+            /* Para que todas las cajas tengan el mismo alto */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 6px;
+            background-color: #000; /* Fondo negro para las imágenes */
+        }
+        p {
+            font-weight: bold;
+            font-size: 1.1em;
+            color: #333;
+        }
+        .reflexion p {
+            font-size: 1em;
+            font-weight: normal;
+        }
     </style>
 </head>
 <body>
-    <h1>Parte 2: Operaciones Morfológicas en Imágenes Médicas</h1>
-    <hr>
+    <div class="header">
+        <h1>Parte 2: Operaciones Morfológicas en Imágenes Médicas</h1>
+    </div>
     
-    /* Formulario para subir la imagen */
+    <!-- Formulario para subir la imagen -->
     <form method="POST" enctype="multipart/form-data">
         <h2>Sube una imagen médica (radiografía, TAC, etc.):</h2>
         <input type="file" name="file" accept="image/*">
         <input type="submit" value="Procesar Imagen">
     </form>
 
-    /* Si hay una imagen procesada, mostramos los resultados */
+    <!-- Esta sección solo aparece si se han procesado las imágenes -->
     {% if original %}
-        <hr>
-        <h2>Resultados del Procesamiento:</h2>
+        <hr style="max-width: 900px; border: 1px solid #e0e0e0; margin: 30px auto;">
+        
+        <h2 style="text-align: center;">Resultados del Procesamiento:</h2>
         
         <div class="results-grid">
             
             <div class="img-container">
                 <p>1. Imagen Original</p>
-                /* Mostramos la imagen original, de la carpeta 'static/uploads' */
-                
+                <!-- Usamos 'url_for' para encontrar la imagen en la carpeta 'static' -->
                 <img src="{{ url_for('static', filename='uploads/' + original) }}" alt="Imagen Original">
             </div>
 
@@ -66,13 +128,16 @@
             
         </div>
         
-        <div style="text-align: center; margin-top: 20px;">
-            <h3>Reflexión:</h3>
+        <div class="reflexion">
+            <h2>Reflexión:</h2>
             <p>Compara la imagen (1) con la (4). La imagen (4) es el resultado de: <br>
                <code>Original + (Top Hat - Black Hat)</code>
             </p>
-            <p>Esto realza los detalles finos y mejora el contraste local,
-               haciendo que estructuras como venas o tumores sean más fáciles de ver.</p>
+            <p>
+               Esta operación realza los detalles finos y mejora el contraste local. Se puede apreciar cómo las estructuras óseas (brillantes)
+               y los espacios intersticiales (oscuros) se definen mucho mejor, facilitando la visualización de estructuras
+               que en la original eran difíciles de ver.
+            </p>
         </div>
     {% endif %}
 
